@@ -1,7 +1,7 @@
 <template>
   <section class="explore">
-    <div class="container">
-      <div class="explore__wrapper">
+    <div class="container explore__wrapper">
+
         <div class="explore__content">
           <span class="tag">Explore</span>
 
@@ -38,7 +38,7 @@
 
         </div>
       </div>
-    </div>
+
   </section>
 </template>
 
@@ -103,24 +103,6 @@ const categories = [
     width: 494px;
   }
 
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 4px 8px;
-    width: 76px;
-    height: 24px;
-    border-radius: 12px;
-    background-color: #ee6352;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
   &__title {
     margin: 16px 0 12px;
     width: 100%;
@@ -141,10 +123,8 @@ const categories = [
   &__btn {
     padding: 10px 18px;
     border: 1px solid #262522;
-    background: transparent;
     font-size: 14px;
     font-weight: 500;
-    text-transform: uppercase;
     margin-top: 40px;
   }
 
@@ -189,4 +169,3 @@ const categories = [
   }
 }
 </style>
-/style>

@@ -28,7 +28,7 @@
           {{ recipe.time }} · {{ recipe.difficulty }} · {{ recipe.serves }}
         </span>
 
-        <button class="recipe-card__btn" type="button">
+        <button class="btn recipe-card__btn" type="button">
           View Recipe
         </button>
       </div>
@@ -120,18 +120,15 @@ defineProps<{
     flex: 0 0 auto;
 
     padding: 10px 14px;
-    border-radius: 999px;
 
     border: 1px solid rgba(0, 0, 0, 0.18);
-    background: transparent;
-    color: #1a1a1a;
+
 
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.4px;
-    text-transform: uppercase;
 
-    cursor: pointer;
+
 
     &:hover {
       background: rgba(255, 255, 255, 0.6);

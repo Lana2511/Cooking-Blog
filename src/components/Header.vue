@@ -15,10 +15,10 @@
 
       <nav class="link-wrapper">
         <a
-            v-for="link in links"
+            v-for="(link, index) in navLinks"
             :key="link.name"
-            href="#"
-            :class="['nav-link', { active: link.active }]"
+            :href="link.href"
+            :class="['nav-link', { active: index==0 }]"
         >
           {{ link.name }}
         </a>
@@ -34,20 +34,22 @@
           />
         </a>
         <button class="btn subscribe-btn">Subscribe</button>
+
+        <button class="burger-btn">
+          <img
+              src="/src/assets/icons/burger-mobile.svg"
+              alt="Menu"
+              width="34"
+              height="34"
+          />
+        </button>
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const links = ref([
-  { name: 'Home', active: true },
-  { name: 'Recipes', active: false },
-  { name: 'Cooking Tips', active: false },
-  { name: 'About Us', active: false }
-])
+import {navLinks} from "../shared/navLinks.ts";
 </script>
 
 <style scoped lang="scss">
@@ -60,11 +62,10 @@ const links = ref([
   padding: 16px 24px;
   max-width: 1312px;
   height: 70px;
-  margin: 0 auto;
+  margin-top: 16px;
   background: transparent;
 }
 
-/* ===== ЛОГО ===== */
 .logo-nav-bar {
   display: flex;
   align-items: center;
@@ -73,6 +74,7 @@ const links = ref([
   &__logo {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
   }
 }
 
@@ -83,7 +85,6 @@ const links = ref([
   color: #1c1c1c;
 }
 
-/* ===== НАВИГАЦИЯ ===== */
 .link-wrapper {
   display: flex;
   gap: 32px;
@@ -117,7 +118,6 @@ const links = ref([
   }
 }
 
-/* ===== КНОПКИ ===== */
 .button-wrapper {
   display: flex;
   align-items: center;
@@ -133,16 +133,39 @@ const links = ref([
 .subscribe-btn {
   background-color: #1c1c1c;
   color: #ffffff;
-  border: none;
-  border-radius: 24px;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 
   &:hover {
     background-color: #000000;
+  }
+}
+
+.burger-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .link-wrapper {
+    display: none;
+  }
+
+  .button-wrapper {
+    .search,
+    .subscribe-btn {
+      display: none;
+    }
+
+    .burger-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 </style>

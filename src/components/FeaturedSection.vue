@@ -33,11 +33,8 @@ import { featuredRecipes } from "../mocks/featuredRecipes.ts";
   &__inner {
     width: 100%;
     max-width: 1312px;
-
-
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 32px;
-
     padding: 18px 18px 20px;
   }
 
@@ -46,7 +43,6 @@ import { featuredRecipes } from "../mocks/featuredRecipes.ts";
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-
     margin-bottom: 14px;
   }
 
