@@ -1,15 +1,6 @@
-export interface FeaturedRecipe {
-    id: number
-    title: string
-    description: string
-    image: string
-    time: string
-    difficulty: string
-    serves: string
-    isVegan: boolean
-}
+import type {Recipe} from "../types/recipe.ts";
 
-export const featuredRecipes: FeaturedRecipe[] = [
+export const featuredRecipes: Recipe[] = [
     {
         id: 1,
         title: "Savory Herb-Infused Chicken",

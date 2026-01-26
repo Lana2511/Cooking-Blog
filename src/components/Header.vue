@@ -33,7 +33,10 @@
               width="37" height="37" loading="lazy"
           />
         </a>
-        <button class="btn subscribe-btn">Subscribe</button>
+        <button class="btn subscribe-btn" @click="onSubscribeClick"
+        >
+          {{ subscriptionStore.isSubscribed ? 'Unsubscribe' : 'Subscribe' }}
+        </button>
 
         <button class="burger-btn">
           <img
@@ -50,6 +53,26 @@
 
 <script setup lang="ts">
 import {navLinks} from "../shared/navLinks.ts";
+import {useSubscriptionStore} from "../stores/useSubscriptionStore.ts";
+
+const subscriptionStore = useSubscriptionStore()
+
+function onSubscribeClick() {
+  if (subscriptionStore.isSubscribed) {
+    subscriptionStore.unsubscribe()
+    return
+  }
+
+  const cta = document.getElementById('cta')
+  if (!cta)
+    return
+
+  cta.scrollIntoView({ behavior: 'smooth' }) // плавная анимация прокрутки
+
+  const input = document.getElementById('cta-email') as HTMLInputElement | null
+  input?.focus() // курсор сразу в инпуте
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -58,12 +81,12 @@ import {navLinks} from "../shared/navLinks.ts";
   align-items: center;
   justify-content: space-between;
   border-radius: 32px;
-  border: 1px solid rgba(38, 37, 34, 0.24);
-  padding: 16px 24px;
+  border: 1px solid rgba(38, 37, 34, 0.24); // перед точкой можно не писать 0
+  padding: 0 24px; // 0 24px
   max-width: 1312px;
   height: 70px;
   margin-top: 16px;
-  background: transparent;
+  background: transparent; // надо сделать цветом
 }
 
 .logo-nav-bar {
@@ -87,7 +110,7 @@ import {navLinks} from "../shared/navLinks.ts";
 
 .link-wrapper {
   display: flex;
-  gap: 32px;
+  gap: 24px;
 }
 
 .nav-link {
@@ -96,6 +119,7 @@ import {navLinks} from "../shared/navLinks.ts";
   font-size: 14px;
   color: #6b6b6b;
   transition: color 0.2s ease;
+  text-transform: uppercase;
 
   &:hover {
     color: #1c1c1c;
@@ -108,12 +132,12 @@ import {navLinks} from "../shared/navLinks.ts";
     &::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 2px;
       background-color: #ff6b4a;
-      border-radius: 2px;
+      border-radius: 0 0 0 2px;
     }
   }
 }
