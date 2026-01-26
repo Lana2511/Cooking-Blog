@@ -1,5 +1,5 @@
 <template>
-  <article class="recipe-card">
+  <article class="recipe-card" @click="onOpen">
     <div class="recipe-card__media">
       <img
           :src="recipe.image"
@@ -28,7 +28,7 @@
           {{ recipe.time }} · {{ recipe.difficulty }} · {{ recipe.serves }}
         </span>
 
-        <button class="btn recipe-card__btn" type="button">
+        <button class="btn recipe-card__btn" type="button" @click.stop="onOpen">
           View Recipe
         </button>
       </div>
@@ -37,12 +37,21 @@
 </template>
 
 <script setup lang="ts">
-import type { FeaturedRecipe } from "../mocks/featuredRecipes.ts";
+import type { Recipe } from "../types/recipe.ts";
 
-defineProps<{
-  recipe: FeaturedRecipe;
-}>();
+const props = defineProps<{
+  recipe: Recipe;
+}>()
+
+const emit = defineEmits<{
+  (e: 'open', id: number | string): void
+}>()
+
+function onOpen() {
+  emit('open', props.recipe.id)
+}
 </script>
+
 
 <style scoped lang="scss">
 .recipe-card {

@@ -11,11 +11,24 @@
       </div>
 
       <div class="featured__cards">
-        <RecipeCard
-            v-for="recipe in featuredRecipes"
-            :key="recipe.id"
-            :recipe="recipe"
-        />
+        <template v-for="recipe in featuredRecipes" :key="recipe.id">
+          <!-- подписан -->
+          <RouterLink
+              v-if="subscriptionStore.isSubscribed"
+              :to="`/recipes/${recipe.id}`"
+              class="recipe-link"
+          >
+            <RecipeCard :recipe="recipe" />
+          </RouterLink>
+
+          <!-- не подписан -->
+          <div
+              v-else
+              class="recipe-link"
+          >
+            <RecipeCard :recipe="recipe" />
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -24,6 +37,10 @@
 <script setup lang="ts">
 import RecipeCard from "./RecipeCard.vue";
 import { featuredRecipes } from "../mocks/featuredRecipes.ts";
+import { RouterLink } from "vue-router";
+import {useSubscriptionStore} from "../stores/useSubscriptionStore.ts";
+
+const subscriptionStore = useSubscriptionStore();
 </script>
 
 <style scoped lang="scss">
@@ -75,7 +92,6 @@ import { featuredRecipes } from "../mocks/featuredRecipes.ts";
 
     font-size: 22px;
     line-height: 1;
-    cursor: pointer;
 
     transition: background-color 140ms ease, transform 140ms ease;
 
@@ -93,6 +109,12 @@ import { featuredRecipes } from "../mocks/featuredRecipes.ts";
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
 
+  }
+
+  .recipe-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
   }
 }
 </style>

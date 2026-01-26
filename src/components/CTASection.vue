@@ -1,5 +1,5 @@
 <template>
-  <section class="cta">
+  <section class="cta" id="cta" v-if="!subscriptionStore.isSubscribed">
     <div class="container cta__wrapper">
 
         <p class="tag cta__tag">Subscribe</p>
@@ -13,7 +13,7 @@
           Subscribe to our newsletter for a weekly serving of recipes, cooking tips, and exclusive insights straight to your inbox.
         </p>
 
-        <form class="cta__form" action="#" method="post">
+        <form class="cta__form" @submit.prevent="onSubmit">
           <div class="cta__field">
             <input
                 class="cta__input"
@@ -22,6 +22,7 @@
                 type="email"
                 placeholder="Email Address"
                 required
+                v-model="email"
             />
             <button class="btn cta__btn" type="submit">Subscribe</button>
           </div>
@@ -32,7 +33,19 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import {useSubscriptionStore} from "../stores/useSubscriptionStore.ts";
 
+const subscriptionStore = useSubscriptionStore()
+const email = ref('')
+
+function onSubmit() {
+  if (!email.value)
+    return
+
+  subscriptionStore.subscribe(email.value)
+  email.value = ''
+}
 </script>
 
 <style scoped lang="scss">
